@@ -16,8 +16,10 @@
 
     <script>
         // Asumimos que ya tienes un endpoint o API configurado para acceder a los blobs
+        //https://<nombre_de_tu_cuenta>.blob.core.windows.net/<nombre_del_contenedor>/<nombre_del_blob>
+        
         document.getElementById("loadBlob").addEventListener("click", function () {
-            fetch('https://<nombre_de_tu_cuenta>.blob.core.windows.net/<nombre_del_contenedor>/<nombre_del_blob>', {
+            fetch('https://az104storage178.blob.core.windows.net/containertest/feliz.png', {
                 method: 'GET',
                 headers: {
                     'x-ms-date': new Date().toUTCString(),
