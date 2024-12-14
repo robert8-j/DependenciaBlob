@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de Dependencia</title>
+</head>
+
+<body>
+    <h1>Prueba de Dependencia entre App Service y Blob Storage</h1>
+    <p>Este archivo interactúa con un Blob Storage en Azure para cargar contenido estático.</p>
+
+    <button id="loadBlob">Cargar Blob</button>
+    <div id="blobContainer"></div>
+
+    <script>
+        // Asumimos que ya tienes un endpoint o API configurado para acceder a los blobs
+        document.getElementById("loadBlob").addEventListener("click", function () {
+            fetch('https://<nombre_de_tu_cuenta>.blob.core.windows.net/<nombre_del_contenedor>/<nombre_del_blob>', {
+                method: 'GET',
+                headers: {
+                    'x-ms-date': new Date().toUTCString(),
+                    'x-ms-version': '2019-02-02',
+                    // Asegúrate de agregar la cadena de conexión o token de acceso adecuado si es necesario
+                }
+            })
+                .then(response => response.blob())
+                .then(blob => {
+                    const blobContainer = document.getElementById("blobContainer");
+                    const url = URL.createObjectURL(blob);
+                    const img = document.createElement('img');
+                    img.src = url;
+                    img.alt = "Contenido cargado desde Blob Storage";
+                    blobContainer.appendChild(img);
+                })
+                .catch(error => {
+                    console.error('Error al cargar el blob:', error);
+                });
+        });
+    </script>
+</body>
+
+</html>
