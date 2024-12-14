@@ -21,11 +21,12 @@
         document.getElementById("loadBlob").addEventListener("click", function () {
             fetch('https://az104storage178.blob.core.windows.net/containertest/feliz.png', {
                 method: 'GET',
-                headers: {
-                    'x-ms-date': new Date().toUTCString(),
-                    'x-ms-version': '2019-02-02',
+                //para solicitudes autenticadas o controladas por SAS usar headers
+               // headers: {
+                 //   'x-ms-date': new Date().toUTCString(),
+                   // 'x-ms-version': '2019-02-02',
                     // Asegúrate de agregar la cadena de conexión o token de acceso adecuado si es necesario
-                }
+               // }
             })
                 .then(response => response.blob())
                 .then(blob => {
